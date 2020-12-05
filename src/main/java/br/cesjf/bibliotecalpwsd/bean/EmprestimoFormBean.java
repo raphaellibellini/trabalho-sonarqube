@@ -176,7 +176,7 @@ public class EmprestimoFormBean implements Serializable {
                 exemplaresPermitidos.addAll(exemplares);
             } else {
                 for(Exemplar e: exemplares) {
-                    if(e.getIdLivro().getId() == livro.getId()) {
+                    if(e.getIdLivro().getId().equals(livro.getId())) {
                         exemplaresPermitidos.add(e);
                     }
                 }
@@ -186,7 +186,7 @@ public class EmprestimoFormBean implements Serializable {
             
             for(Exemplar e: lista) {
                 for(Emprestimo emp: EmprestimoDAO.getInstance().getList()) {
-                    if(emp.getIdExemplar().getId() == e.getId()) {
+                    if(emp.getIdExemplar().getId().equals(e.getId())) {
                         if(emp.getDataDevolucao() == null && emp.getDataEmprestimo().compareTo(dataReserva) <= 0 && emp.getDataDevolucaoPrevista().compareTo(dataReserva) >= 0) {
                             exemplaresPermitidos.remove(e);
                             continue;
@@ -198,7 +198,7 @@ public class EmprestimoFormBean implements Serializable {
                     }
                 }
                 for(Reserva r: ReservaDAO.getInstance().getList()) {
-                    if(r.getIdExemplar().getId() == e.getId()){
+                    if(r.getIdExemplar().getId().equals(e.getId())){
                         if(!r.getCancelada() && r.getDataReserva().compareTo(dataReserva) <= 0 && r.getDataDevolucaoPrevista().compareTo(dataReserva) >= 0) {
                             exemplaresPermitidos.remove(e);
                         }
